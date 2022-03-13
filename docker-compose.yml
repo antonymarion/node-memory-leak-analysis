@@ -1,0 +1,21 @@
+version: "3"
+services:
+  console:
+    image: nodesource/nsolid-console:carbon-latest
+    container_name: nsolid.console
+    environment:
+      - NODE_DEBUG=nsolid
+    ports:
+      - 6753:6753
+      - 9001:9001
+      - 9002:9002
+      - 9003:9003
+  memoryleak:
+    image: memoryleak-node-minimal-app:12.16.2
+    container_name: memoryleak.minimal.repo
+    environment:
+      - NODE_DEBUG=nsolid
+      - NSOLID_APPNAME=minimal_app_node_leak
+      - NSOLID_COMMAND=console:9001
+      - NSOLID_DATA=console:9002
+      - NSOLID_BULK=console:9003
